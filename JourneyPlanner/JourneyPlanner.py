@@ -224,6 +224,9 @@ def travelRoute():
         #represents each mode of transportation or walking, so it can be
         #displayed to the user step by step.
 
+        prevDesc = ''
+        #Previous Description
+
         for i, detail in enumerate(selectedRoute):
             print(f"Step {i+1}:")
             print("From {}".format(detail['departurePoint']['commonName']))
@@ -233,8 +236,12 @@ def travelRoute():
             isDisrupted = detail['isDisrupted']
             if isDisrupted == True:
                 for disruption in detail['disruptions']:
-                    print("\n------Disruption:------\n")
-                    print(disruption['description'])
+                    disDesc = disruption['description']
+                    #Disruption Description
+                    if disDesc != prevDesc:
+                        print("\n------Disruption:------\n")
+                        print(disDesc)
+                        prevDesc = disDesc
             else:
                 print("\nNo disruptions reported.")
             print()
